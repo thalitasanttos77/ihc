@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Portal do Estudante — UFPR</title>
+    <link rel="stylesheet" href="home.component.css" />
+  </head>
+  <body>
+    <!-- Top navigation / header -->
+    <header class="topbar" role="banner">
+      <button class="icon-btn menu" aria-label="Abrir menu">☰</button>
+
+      <div class="brand">
+        <img
+          src="https://placehold.co/120x40?text=UFPR"
+          alt="UFPR logo"
+          class="logo"
+        />
+        <span class="brand-title">Portal do Estudante</span>
+      </div>
+
+      <div class="spacer"></div>
+
+      <div class="search">
+        <input
+          id="site-search"
+          type="search"
+          placeholder="Pesquisar..."
+          aria-label="Pesquisar"
+        />
+        <button id="btn-search" class="icon-btn" aria-label="Buscar">🔍</button>
+      </div>
+
+      <nav class="top-actions" aria-label="Ações do usuário">
+        <button class="icon-btn" title="Idioma" aria-label="Idioma">🌐</button>
+        <button class="icon-btn" title="Notificações" aria-label="Notificações">
+          🔔
+        </button>
+        <button class="icon-btn" title="Conta" aria-label="Conta">👤</button>
+      </nav>
+    </header>
+
+    <main class="container" role="main">
+      <!-- Hero / Intro -->
+      <section class="hero" aria-labelledby="welcome-title">
+        <h1 id="welcome-title" class="hero-title">
+          Bem-vindo(a) ao Portal do Estudante UFPR!
+        </h1>
+        <p class="hero-sub">
+          Este é o seu espaço central para a vida acadêmica. Aqui, você acessa
+          de forma rápida e segura todas as informações e serviços essenciais
+          para a sua jornada na Universidade Federal do Paraná.
+        </p>
+      </section>
+
+      <!-- Notícias area (carousel-like visual) -->
+      <section class="news" aria-labelledby="news-title">
+        <h2 id="news-title" class="section-heading">Notícias</h2>
+
+        <div class="news-panel" id="news-panel" aria-roledescription="carousel">
+          <button class="carousel-nav left" aria-label="Anterior">‹</button>
+
+          <div class="news-cards" id="news-cards">
+            <article class="news-card" data-keywords="vestibular 2026">
+              <img src="https://placehold.co/520x320" alt="Vestibular 2026" />
+              <div class="news-body">
+                <h3>Vestibular 2026</h3>
+                <p>
+                  Fique por dentro das datas de inscrição, isenção, provas e da
+                  divulgação do edital oficial.
+                </p>
+              </div>
+            </article>
+
+            <article
+              class="news-card"
+              data-keywords="calendário acadêmico 2025"
+            >
+              <img
+                src="https://placehold.co/520x320"
+                alt="Calendário Acadêmico"
+              />
+              <div class="news-body">
+                <h3>Calendário Acadêmico 2025.2</h3>
+                <p>
+                  Consulte o cronograma completo do semestre com as datas
+                  cruciais para matrículas.
+                </p>
+              </div>
+            </article>
+
+            <article class="news-card" data-keywords="projetos extensão">
+              <img
+                src="https://placehold.co/520x320"
+                alt="Projetos de Extensão"
+              />
+              <div class="news-body">
+                <h3>Projetos de Extensão</h3>
+                <p>
+                  Descubra como aplicar seus conhecimentos acadêmicos em
+                  projetos práticos.
+                </p>
+              </div>
+            </article>
+          </div>
+
+          <button class="carousel-nav right" aria-label="Próximo">›</button>
+        </div>
+
+        <div class="carousel-dots" id="carousel-dots" aria-hidden="false"></div>
+      </section>
+
+      <!-- Explorar grid (horizontal scroll on wide screens) -->
+      <section class="explore" aria-labelledby="explore-title">
+        <div class="explore-header">
+          <h2 id="explore-title">Explorar</h2>
+          <button class="icon-btn small" aria-label="Pesquisar em Explorar">
+            🔍
+          </button>
+        </div>
+
+        <div class="explore-row" id="explore-row">
+          <article
+            class="tile"
+            data-keywords="vida acadêmica matrícula trancamento estágios"
+          >
+            <img src="https://placehold.co/320x200" alt="Vida Acadêmica" />
+            <div class="tile-body">
+              <strong>Vida Acadêmica</strong>
+              <span>Matrícula, trancamento, estágios.</span>
+            </div>
+          </article>
+
+          <article
+            class="tile"
+            data-keywords="ferramentas ufpr virtual teams office"
+          >
+            <img src="https://placehold.co/320x200" alt="Ferramentas" />
+            <div class="tile-body">
+              <strong>Ferramentas</strong>
+              <span>UFPR Virtual, Teams, Office.</span>
+            </div>
+          </article>
+
+          <article
+            class="tile"
+            data-keywords="oportunidades bolsas empresas júnior atléticas"
+          >
+            <img src="https://placehold.co/320x200" alt="Oportunidades" />
+            <div class="tile-body">
+              <strong>Oportunidades</strong>
+              <span>Bolsas, Empresas Júnior, Atléticas.</span>
+            </div>
+          </article>
+
+          <article
+            class="tile"
+            data-keywords="eventos cultura palestras auditórios"
+          >
+            <img src="https://placehold.co/320x200" alt="Eventos e Cultura" />
+            <div class="tile-body">
+              <strong>Eventos e Cultura</strong>
+              <span>Palestras, Eventos, Auditórios.</span>
+            </div>
+          </article>
+
+          <article class="tile" data-keywords="serviços casa 3 casa 4">
+            <img src="https://placehold.co/320x200" alt="Serviços" />
+            <div class="tile-body">
+              <strong>Serviços</strong>
+              <span>Casa 3, Casa 4.</span>
+            </div>
+          </article>
+
+          <article
+            class="tile"
+            data-keywords="admin coordenações pró-reitorias"
+          >
+            <img src="https://placehold.co/320x200" alt="Administração" />
+            <div class="tile-body">
+              <strong>Administração</strong>
+              <span>Coordenações, Pró Reitorias.</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Favoritos -->
+      <section class="favorites" aria-labelledby="fav-title">
+        <h2 id="fav-title">Favoritos <span class="heart">♡</span></h2>
+
+        <div class="favorites-grid">
+          <article class="fav-card">
+            <img src="https://placehold.co/320x200" alt="R.U" />
+            <div class="fav-body">
+              <strong>R.U</strong>
+              <p>Cardápio Diário.</p>
+            </div>
+          </article>
+
+          <article class="fav-card">
+            <img src="https://placehold.co/320x200" alt="Wifi" />
+            <div class="fav-body">
+              <strong>Wifi</strong>
+              <p>Rede gratuita.</p>
+            </div>
+          </article>
+
+          <article class="fav-card">
+            <img src="https://placehold.co/320x200" alt="Casa 4" />
+            <div class="fav-body">
+              <strong>Casa 4</strong>
+              <p>Promover auxílio terapêutico, ambulatorial.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="circle-links">
+          <a class="circle-item" href="#" aria-label="Biblioteca">
+            <img src="https://placehold.co/96x96" alt="Biblioteca" />
+            <span>Biblioteca</span>
+          </a>
+          <a class="circle-item" href="#" aria-label="Campi">
+            <img src="https://placehold.co/96x96" alt="Campi" />
+            <span>Campi</span>
+          </a>
+          <a class="circle-item" href="#" aria-label="Ciência">
+            <img src="https://placehold.co/96x96" alt="Ciência" />
+            <span>Ciência</span>
+          </a>
+          <a class="circle-item" href="#" aria-label="Concursos">
+            <img src="https://placehold.co/96x96" alt="Concursos" />
+            <span>Concursos</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Footer contact -->
+      <footer class="site-footer" role="contentinfo">
+        <div class="footer-left">
+          <strong>Portal do Estudante</strong>
+          <div class="socials">
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="Twitter">t</a>
+            <a href="#" aria-label="Instagram">in</a>
+          </div>
+        </div>
+
+        <div class="footer-right">
+          <div class="contact-block">
+            <div class="contact-title">Coordenação do Curso</div>
+            <div class="contact-phone">(41) 3361-4905</div>
+          </div>
+
+          <div class="contact-block">
+            <div class="contact-title">Secretaria Online</div>
+            <div class="contact-phone">(41) 3361-4905</div>
+          </div>
+        </div>
+      </footer>
+    </main>
+  </body>
+</html>
