@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+:root{
+  --ui-font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Reset / global */
+html, body {
+  height:100%;
+  margin:0;
+  padding:0;
+  font-family: var(--ui-font);
+  font-size: 16px;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* garantir inputs e botões também usem a mesma fonte */
+input, textarea, select, button {
+  font-family: var(--ui-font);
+}

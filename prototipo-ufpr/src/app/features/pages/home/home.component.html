@@ -1,264 +1,366 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Portal do Estudante — UFPR</title>
-    <link rel="stylesheet" href="home.component.css" />
-  </head>
-  <body>
-    <!-- Top navigation / header -->
-    <header class="topbar" role="banner">
-      <button class="icon-btn menu" aria-label="Abrir menu">☰</button>
+<!-- Header + single menu button -->
+<header class="topbar" role="banner">
+  <button #menuBtn class="icon-btn menu" aria-label="Abrir menu" (click)="toggleSidebar()">☰</button>
 
-      <div class="brand">
-        <img
-          src="https://placehold.co/120x40?text=UFPR"
-          alt="UFPR logo"
-          class="logo"
-        />
-        <span class="brand-title">Portal do Estudante</span>
-      </div>
+  <div>
+    <img src="img/logo-ufpr2.png" alt="UFPR logo" width="120" height="40" />
+  </div>
 
-      <div class="spacer"></div>
+  <div class="search">
+    <input id="site-search" type="search" placeholder="Pesquisar..." aria-label="Pesquisar" />
+    <button class="icon-btn" title="Buscar" aria-label="Buscar"> <i class="fa-solid fa-search" aria-hidden="true"></i> </button>
+  </div>
 
-      <div class="search">
-        <input
-          id="site-search"
-          type="search"
-          placeholder="Pesquisar..."
-          aria-label="Pesquisar"
-        />
-        <button id="btn-search" class="icon-btn" aria-label="Buscar">🔍</button>
-      </div>
+  <nav class="top-actions" aria-label="Ações do usuário">
 
-      <nav class="top-actions" aria-label="Ações do usuário">
-        <button class="icon-btn" title="Idioma" aria-label="Idioma">🌐</button>
-        <button class="icon-btn" title="Notificações" aria-label="Notificações">
-          🔔
-        </button>
-        <button class="icon-btn" title="Conta" aria-label="Conta">👤</button>
-      </nav>
-    </header>
+    <button class="icon-btn" title="Idioma" aria-label="Idioma"> <i class="fa-solid fa-language" aria-hidden="true"></i> </button>
+    <button class="icon-btn" title="Notificações" aria-label="Notificações"> <i class="fa-solid fa-bell" aria-hidden="true"></i> </button>
+    <button class="icon-btn" title="Conta" aria-label="Conta"> <i class="fa-solid fa-user" aria-hidden="true"></i> </button>
+  </nav>
+</header>
 
-    <main class="container" role="main">
-      <!-- Hero / Intro -->
-      <section class="hero" aria-labelledby="welcome-title">
-        <h1 id="welcome-title" class="hero-title">
-          Bem-vindo(a) ao Portal do Estudante UFPR!
-        </h1>
-        <p class="hero-sub">
-          Este é o seu espaço central para a vida acadêmica. Aqui, você acessa
-          de forma rápida e segura todas as informações e serviços essenciais
-          para a sua jornada na Universidade Federal do Paraná.
-        </p>
-      </section>
+<!-- Overlay and Sidebar (one instance only) -->
+<div class="sidebar-overlay" [class.show]="isSidebarOpen" (click)="closeSidebar()" [attr.aria-hidden]="!isSidebarOpen"></div>
 
-      <!-- Notícias area (carousel-like visual) -->
-      <section class="news" aria-labelledby="news-title">
+<aside class="sidebar" role="dialog" aria-modal="true" aria-label="Navegação principal"
+       [class.open]="isSidebarOpen" #sidebar>
+  <div class="sidebar-header">
+    <strong>Menu</strong>
+    <button class="icon-btn close-btn" aria-label="Fechar menu" (click)="closeSidebar()">✕</button>
+  </div>
+
+  <nav class="sidebar-nav" aria-label="Menu principal">
+    <ul>
+      <li><a href="#" (click)="closeSidebar()">Início</a></li>
+      <li><a href="#" (click)="closeSidebar()">Notícias</a></li>
+      <li><a href="#" (click)="closeSidebar()">Explorar</a></li>
+      <li><a href="#" (click)="closeSidebar()">Favoritos</a></li>
+      <li><a href="#" (click)="closeSidebar()">Contato</a></li>
+    </ul>
+  </nav>
+
+  <div class="sidebar-footer">
+    <small>Portal do Estudante — UFPR</small>
+  </div>
+</aside>
+
+<main class="container" role="main">
+  <!-- Hero / Intro -->
+  <br><br>
+  <br><br><br><br>
+  <section class="hero" aria-labelledby="welcome-title">
+    <h1 id="welcome-title" class="hero-title">
+      Bem-vindo(a) ao Portal do Estudante UFPR!
+    </h1>
+    <p class="hero-sub">
+      Este é o seu espaço central para a vida acadêmica.
+      <br>
+      Aqui, você acessa
+      de forma rápida e segura todas as informações e serviços essenciais
+      para a sua jornada na Universidade Federal do Paraná.
+    </p>
+  </section>
+
+
+  <br><br>
+  <!-- Notícias area (carousel-like visual) -->
+  <section class="news" aria-labelledby="news-title">
+    <div class="news-panel" id="news-panel" aria-roledescription="carousel">
+      <!-- Título agora está dentro do painel -->
+      <div class="news-panel-header">
         <h2 id="news-title" class="section-heading">Notícias</h2>
+      </div>
+      <!-- <button class="carousel-nav left" aria-label="Anterior">‹</button> -->
 
-        <div class="news-panel" id="news-panel" aria-roledescription="carousel">
-          <button class="carousel-nav left" aria-label="Anterior">‹</button>
+      <div class="news-cards" id="news-cards">
+        <article class="news-card" data-keywords="vestibular 2026">
+          <img src="img/estudantes.png" alt="vestibular 2026" />
+          <div class="news-body">
+            <h3>Vestibular 2026</h3>
+            <p>
+              Fique por dentro das datas de inscrição, isenção, provas e da
+              divulgação do edital oficial.
+            </p>
+          </div>
+        </article>
 
-          <div class="news-cards" id="news-cards">
-            <article class="news-card" data-keywords="vestibular 2026">
-              <img src="https://placehold.co/520x320" alt="Vestibular 2026" />
-              <div class="news-body">
-                <h3>Vestibular 2026</h3>
-                <p>
-                  Fique por dentro das datas de inscrição, isenção, provas e da
-                  divulgação do edital oficial.
-                </p>
-              </div>
-            </article>
+        <a class="news-link" href="https://prograp.ufpr.br/calendario-academico/" target="_blank"
+          rel="noopener noreferrer" aria-label="Abrir Calendário Acadêmico 2025 em nova aba">
+          <article class="news-card" data-keywords="calendário acadêmico 2025">
+            <img src="img/calendario.png" alt="calendário acadêmico 2025" />
+            <div class="news-body">
+              <h3>Calendário Acadêmico 2025.2</h3>
+              <p>Consulte o cronograma completo do semestre com as datas cruciais para matrículas.</p>
+            </div>
+          </article>
+        </a>
 
-            <article
-              class="news-card"
-              data-keywords="calendário acadêmico 2025"
-            >
-              <img
-                src="https://placehold.co/520x320"
-                alt="Calendário Acadêmico"
-              />
-              <div class="news-body">
-                <h3>Calendário Acadêmico 2025.2</h3>
-                <p>
-                  Consulte o cronograma completo do semestre com as datas
-                  cruciais para matrículas.
-                </p>
-              </div>
-            </article>
+        <article class="news-card" data-keywords="projetos extensão">
+          <img src="img/estudantes-rindo.png" alt="projetos de extensão" />
+          <div class="news-body">
+            <h3>Projetos de Extensão</h3>
+            <p>
+              Descubra como aplicar seus conhecimentos acadêmicos em projetos práticos.
+            </p>
+          </div>
+        </article>
 
-            <article class="news-card" data-keywords="projetos extensão">
-              <img
-                src="https://placehold.co/520x320"
-                alt="Projetos de Extensão"
-              />
-              <div class="news-body">
-                <h3>Projetos de Extensão</h3>
-                <p>
-                  Descubra como aplicar seus conhecimentos acadêmicos em
-                  projetos práticos.
-                </p>
-              </div>
-            </article>
+        <article class="news-card" data-keywords="projetos extensão">
+          <img src="img/formandos.jpg" alt="Projetos de Extensão" />
+          <div class="news-body">
+            <h3>Formandos 2026.1</h3>
+            <p>
+              Descubra como se preparar para a formatura e os eventos
+              relacionados.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Replace the existing explore section with this -->
+  <section class="explore" aria-labelledby="explore-title">
+    <div class="explore-header">
+      <h2 id="explore-title">Explorar</h2>
+    </div>
+
+    <div class="explore-panel">
+      <div class="explore-row" id="explore-row" #exploreRow>
+        <article class="tile" data-keywords="vida acadêmica matrícula trancamento estágios">
+          <div class="img-wrapper">
+            <img src="img/santos-andrade.jpg" alt="Vida Acadêmica" />
+          </div>
+          <div class="tile-body">
+            <strong>Vida Acadêmica</strong>
+            <br>
+            <span>Matrícula, trancamento, estágios.</span>
+          </div>
+        </article>
+
+        <article class="tile" data-keywords="ferramentas ufpr virtual teams office">
+          <div class="img-wrapper">
+            <img src="img/moodle.jpg" alt="Ferramentas" />
+          </div>
+          <div class="tile-body">
+            <strong>Ferramentas</strong>
+            <br>
+            <span>UFPR Virtual, Teams, Office.</span>
+          </div>
+        </article>
+
+        <article class="tile" data-keywords="oportunidades bolsas empresas júnior atléticas">
+          <div class="img-wrapper">
+            <img src="img/notebook.jpg" alt="Oportunidades" />
+          </div>
+          <div class="tile-body">
+            <strong>Oportunidades</strong>
+            <br>
+            <span>Bolsas, Empresas Júnior, Atléticas.</span>
+          </div>
+        </article>
+
+        <article class="tile" data-keywords="eventos cultura palestras auditórios">
+          <div class="img-wrapper">
+            <img src="img/auditorio.jpg" alt="Eventos e Cultura" />
+          </div>
+          <div class="tile-body">
+            <strong>Eventos e Cultura</strong>
+            <br>
+            <span>Palestras, Eventos, Auditórios.</span>
+          </div>
+        </article>
+
+        <article class="tile" data-keywords="serviços casa 3 casa 4">
+          <div class="img-wrapper">
+            <img src="img/medico.jpg" alt="Serviços" />
+          </div>
+          <div class="tile-body">
+            <strong>Serviços</strong>
+            <br>
+            <span>Casa 3, Casa 4.</span>
+          </div>
+        </article>
+
+        <article class="tile" data-keywords="admin coordenações pró-reitorias">
+          <div class="img-wrapper">
+            <img src="img/ufpr-curitiba.jpg" alt="Administração" />
+          </div>
+          <div class="tile-body">
+            <strong>Administração</strong>
+            <br>
+            <span>Coordenações, Pró Reitorias.</span>
+          </div>
+        </article>
+
+        <article class="tile" data-keywords="ferramentas ufpr virtual teams office">
+          <div class="img-wrapper">
+            <img src="img/ru.png" alt="R.U" />
+          </div>
+          <div class="tile-body">
+            <strong>R.U</strong>
+            <br>
+            <span>Cardápio Diário.</span>
+          </div>
+        </article>
+
+        <article class="tile" data-keywords="wifi">
+          <div class="img-wrapper">
+            <img src="img/wifi.png" alt="Wifi" />
+          </div>
+          <div class="tile-body">
+            <strong>Wifi</strong>
+            <br>
+            <span>Rede gratuita.</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Favoritos -->
+  <section class="favorites" aria-labelledby="fav-title">
+    <h2 id="fav-title">Favoritos </h2>
+
+    <div class="favorites-grid">
+      <article class="fav-card">
+        <img src="img/ru.png" alt="R.U" />
+        <div class="fav-body">
+          <strong>R.U</strong>
+        </div>
+      </article>
+
+      <article class="fav-card">
+        <img src="img/wifi.png" alt="Wifi" />
+        <div class="fav-body">
+          <strong>Wifi</strong>
+        </div>
+      </article>
+
+      <article class="fav-card">
+        <img src="img/psicologo.jpg" alt="Casa 4" />
+        <div class="fav-body">
+          <strong>Casa 4</strong>
+        </div>
+      </article>
+
+      <a class="fav-link" href="https://office.com" target="_blank" rel="noopener noreferrer"
+        aria-label="Abrir Office 365 (abre em nova aba)">
+        <article class="fav-card">
+          <img src="img/365.jpg" alt="Office 365" />
+          <div class="fav-body">
+            <strong>Office 365</strong>
+          </div>
+        </article>
+      </a>
+
+    </div>
+
+    <br><br>
+    <div class="circle-links">
+
+      <a class="circle-item" href="#" aria-label="Biblioteca">
+        <img src="img/SIBI.png" alt="Biblioteca" />
+        <span>Biblioteca</span>
+      </a>
+      <a class="circle-item" href="#" aria-label="SIGA">
+        <img src="img/siga.png" alt="SIGA" />
+        <span>SIGA</span>
+      </a>
+      <a class="circle-item" href="#" aria-label="SEPT">
+        <img src="img/sept.jpg" alt="SEPT" />
+        <span>SEPT</span>
+      </a>
+      <a class="circle-item" href="#" aria-label="UFPR Virtual">
+        <img src="img/ufpr-virtual.png" alt="UFPR Virtual" />
+        <span>UFPR Virtual</span>
+      </a>
+      <a class="circle-item" href="#" aria-label="Biblioteca">
+        <img src="img/ppg.png" alt="Biblioteca" />
+        <span>PRPPG</span>
+      </a>
+      <a class="circle-item" href="#" aria-label="Biblioteca">
+        <img src="img/tads.png" alt="TADS" />
+        <span>TADS</span>
+      </a>
+      <a class="circle-item" href="#" aria-label="Campi">
+        <img src="img/ncu.png" alt="Campi" />
+        <span>NUC</span>
+      </a>
+      <a class="circle-item" href="#" aria-label="Ciência">
+        <img src="img/TV.png" alt="Ciência" />
+        <span>UFPR TV</span>
+      </a>
+      <a class="circle-item" href="#" aria-label="Concursos">
+        <img src="img/VEST.png" alt="Concursos" />
+        <span>Vestibular</span>
+      </a>
+    </div>
+  </section>
+
+  <br><br><br>
+  <!-- Footer contact -->
+  <footer class="site-footer" role="contentinfo" aria-label="Rodapé do site">
+    <div class="footer-inner">
+      <div class="footer-col footer-brand">
+        <img src="img/logo-ufpr2.png" alt="Logo UFPR" class="footer-logo" />
+        <p class="footer-desc">Portal do Estudante — UFPR. Acesse serviços, notícias e recursos para apoiar sua jornada
+          acadêmica.</p>
+
+        <div class="socials" aria-label="Redes sociais">
+          <a href="#" aria-label="Facebook" class="social-link">Facebook</a>
+          <a href="#" aria-label="Twitter" class="social-link">Twitter</a>
+          <a href="#" aria-label="Instagram" class="social-link">Instagram</a>
+        </div>
+      </div>
+
+      <div class="footer-col footer-links" aria-labelledby="footer-links-title">
+        <h3 id="footer-links-title">Links Rápidos</h3>
+        <ul>
+          <li><a href="#" title="Calendário Acadêmico">Calendário Acadêmico</a></li>
+          <li><a href="#" title="Secretaria Online">Secretaria Online</a></li>
+          <li><a href="#" title="Matrícula">Matrícula</a></li>
+          <li><a href="#" title="Biblioteca">Biblioteca</a></li>
+          <li><a href="#" title="Portal do Aluno">Portal do Aluno</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-contact" aria-labelledby="footer-contact-title">
+        <h3 id="footer-contact-title">Contato</h3>
+        <address>
+          <div class="contact-row">
+            <span class="contact-title">Coordenação do Curso</span>
+            <a href="tel:+554133614905" class="contact-phone">(41) 3361-4905</a>
           </div>
 
-          <button class="carousel-nav right" aria-label="Próximo">›</button>
-        </div>
-
-        <div class="carousel-dots" id="carousel-dots" aria-hidden="false"></div>
-      </section>
-
-      <!-- Explorar grid (horizontal scroll on wide screens) -->
-      <section class="explore" aria-labelledby="explore-title">
-        <div class="explore-header">
-          <h2 id="explore-title">Explorar</h2>
-          <button class="icon-btn small" aria-label="Pesquisar em Explorar">
-            🔍
-          </button>
-        </div>
-
-        <div class="explore-row" id="explore-row">
-          <article
-            class="tile"
-            data-keywords="vida acadêmica matrícula trancamento estágios"
-          >
-            <img src="https://placehold.co/320x200" alt="Vida Acadêmica" />
-            <div class="tile-body">
-              <strong>Vida Acadêmica</strong>
-              <span>Matrícula, trancamento, estágios.</span>
-            </div>
-          </article>
-
-          <article
-            class="tile"
-            data-keywords="ferramentas ufpr virtual teams office"
-          >
-            <img src="https://placehold.co/320x200" alt="Ferramentas" />
-            <div class="tile-body">
-              <strong>Ferramentas</strong>
-              <span>UFPR Virtual, Teams, Office.</span>
-            </div>
-          </article>
-
-          <article
-            class="tile"
-            data-keywords="oportunidades bolsas empresas júnior atléticas"
-          >
-            <img src="https://placehold.co/320x200" alt="Oportunidades" />
-            <div class="tile-body">
-              <strong>Oportunidades</strong>
-              <span>Bolsas, Empresas Júnior, Atléticas.</span>
-            </div>
-          </article>
-
-          <article
-            class="tile"
-            data-keywords="eventos cultura palestras auditórios"
-          >
-            <img src="https://placehold.co/320x200" alt="Eventos e Cultura" />
-            <div class="tile-body">
-              <strong>Eventos e Cultura</strong>
-              <span>Palestras, Eventos, Auditórios.</span>
-            </div>
-          </article>
-
-          <article class="tile" data-keywords="serviços casa 3 casa 4">
-            <img src="https://placehold.co/320x200" alt="Serviços" />
-            <div class="tile-body">
-              <strong>Serviços</strong>
-              <span>Casa 3, Casa 4.</span>
-            </div>
-          </article>
-
-          <article
-            class="tile"
-            data-keywords="admin coordenações pró-reitorias"
-          >
-            <img src="https://placehold.co/320x200" alt="Administração" />
-            <div class="tile-body">
-              <strong>Administração</strong>
-              <span>Coordenações, Pró Reitorias.</span>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- Favoritos -->
-      <section class="favorites" aria-labelledby="fav-title">
-        <h2 id="fav-title">Favoritos <span class="heart">♡</span></h2>
-
-        <div class="favorites-grid">
-          <article class="fav-card">
-            <img src="https://placehold.co/320x200" alt="R.U" />
-            <div class="fav-body">
-              <strong>R.U</strong>
-              <p>Cardápio Diário.</p>
-            </div>
-          </article>
-
-          <article class="fav-card">
-            <img src="https://placehold.co/320x200" alt="Wifi" />
-            <div class="fav-body">
-              <strong>Wifi</strong>
-              <p>Rede gratuita.</p>
-            </div>
-          </article>
-
-          <article class="fav-card">
-            <img src="https://placehold.co/320x200" alt="Casa 4" />
-            <div class="fav-body">
-              <strong>Casa 4</strong>
-              <p>Promover auxílio terapêutico, ambulatorial.</p>
-            </div>
-          </article>
-        </div>
-
-        <div class="circle-links">
-          <a class="circle-item" href="#" aria-label="Biblioteca">
-            <img src="https://placehold.co/96x96" alt="Biblioteca" />
-            <span>Biblioteca</span>
-          </a>
-          <a class="circle-item" href="#" aria-label="Campi">
-            <img src="https://placehold.co/96x96" alt="Campi" />
-            <span>Campi</span>
-          </a>
-          <a class="circle-item" href="#" aria-label="Ciência">
-            <img src="https://placehold.co/96x96" alt="Ciência" />
-            <span>Ciência</span>
-          </a>
-          <a class="circle-item" href="#" aria-label="Concursos">
-            <img src="https://placehold.co/96x96" alt="Concursos" />
-            <span>Concursos</span>
-          </a>
-        </div>
-      </section>
-
-      <!-- Footer contact -->
-      <footer class="site-footer" role="contentinfo">
-        <div class="footer-left">
-          <strong>Portal do Estudante</strong>
-          <div class="socials">
-            <a href="#" aria-label="Facebook">f</a>
-            <a href="#" aria-label="Twitter">t</a>
-            <a href="#" aria-label="Instagram">in</a>
-          </div>
-        </div>
-
-        <div class="footer-right">
-          <div class="contact-block">
-            <div class="contact-title">Coordenação do Curso</div>
-            <div class="contact-phone">(41) 3361-4905</div>
+          <div class="contact-row">
+            <span class="contact-title">Secretaria Online</span>
+            <a href="tel:+554133614905" class="contact-phone">(41) 3361-4905</a>
           </div>
 
-          <div class="contact-block">
-            <div class="contact-title">Secretaria Online</div>
-            <div class="contact-phone">(41) 3361-4905</div>
+          <div class="contact-row">
+            <span class="contact-title">E-mail</span>
+            <a href="mailto:secretaria&#64;ufpr.br" class="contact-phone">secretaria&#64;ufpr.br</a>
           </div>
-        </div>
-      </footer>
-    </main>
-  </body>
-</html>
+        </address>
+      </div>
+
+      <div class="footer-col footer-info" aria-labelledby="footer-info-title">
+        <h3 id="footer-info-title">Local & Horário</h3>
+        <p class="footer-address">Universidade Federal do Paraná — Campus Curitiba<br />Av. Brasil, 1234 — Curitiba - PR
+        </p>
+        <p class="footer-hours"><strong>Horário de atendimento:</strong><br />Seg — Sex: 09:00 — 17:00</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <small> <span id="year">2025</span> Universidade Federal do Paraná. Todos os direitos reservados.</small>
+      <nav class="footer-policy" aria-label="Políticas e Acessibilidade">
+        <a href="#" title="Termos de uso">Termos de uso</a>
+        <a href="#" title="Política de privacidade">Política de privacidade</a>
+        <a href="#" title="Acessibilidade">Acessibilidade</a>
+      </nav>
+    </div>
+  </footer>
+</main>

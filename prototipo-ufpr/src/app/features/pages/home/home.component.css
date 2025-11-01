@@ -77,11 +77,11 @@ img { display:block; max-width:100%; height:auto; }
 
 /* Hero */
 .hero { margin: 28px 0 36px; }
-.hero-title { font-size:28px; margin:0 0 10px; font-weight:800; color:var(--text); }
-.hero-sub { margin:0; font-size:16px; color: rgba(0,0,0,0.7); line-height:1.6; font-weight:300; }
+.hero-title { font-size:32px; margin-left:60px; font-weight:800; color:var(--text); }
+.hero-sub { margin-left:60px; font-size:20px; color: rgba(0,0,0,0.7); line-height:1.6; font-weight:300; }
 
 /* Section heading utility */
-.section-heading { font-size:22px; margin:0 0 16px; color: var(--accent); font-weight:700; text-align:center; }
+.section-heading { font-size:28px; margin:0 0 16px; color: var(--accent); font-weight:700; text-align:center; }
 
 /* News panel (rounded card background) */
 .news {
@@ -90,14 +90,23 @@ img { display:block; max-width:100%; height:auto; }
 }
 .news-panel {
   position:relative;
-  background: var(--panel);
+  background: #e6f3f7;
   border-radius: 14px;
   padding: 28px;
   display:flex;
+  flex-direction: column;
   align-items:center;
   gap:12px;
   box-shadow: var(--shadow);
   overflow:hidden;
+}
+.news-panel-header {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* centraliza título horizontalmente */
+  align-items: center;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 .news-cards {
   display:flex;
@@ -116,10 +125,102 @@ img { display:block; max-width:100%; height:auto; }
   gap:12px;
   align-items:stretch;
 }
-.news-card img { border-radius:12px; object-fit:cover; height:160px; width:100%; }
+.news-card img { border-radius:12px; object-fit:cover; height:200px; width:100%; }
 .news-body { padding:6px 6px 0; }
 .news-body h3 { margin:0 0 6px; font-size:16px; color:var(--text); }
 .news-body p { margin:0; font-size:13px; color:var(--muted); }
+/* Garantir que o <a> que envolve o card se comporte como item de layout */
+.news-link {
+  display: inline-flex;        /* mantém comportamento de item flex no container */
+  flex: 0 0 auto;
+  align-items: stretch;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Forçar o article a ocupar 100% do <a> */
+.news-link > .news-card {
+  width: 100%;
+  min-width: 300px;            /* combine com seus valores de desktop */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Uniformizar todas as imagens dos cards (tanto dentro de <a> quanto fora) */
+.news-card img,
+.news-link .news-card img,
+.news-cards .news-card img {
+  width: 100% !important;      /* garantir que preencha a largura do cartão */
+  height: 200px !important;    /* mesma altura que você usava no layout */
+  object-fit: cover !important;
+  object-position: center;
+  display: block;
+  border-radius: 12px 12px 0 0; /* manter bordas arredondadas no topo */
+  box-sizing: border-box;
+}
+
+/* Se você usa media queries que alteram height/width, mantenha parity */
+@media (max-width: 1099px) {
+  .news-card img,
+  .news-link .news-card img {
+    height: 140px !important;
+  }
+}
+@media (max-width: 700px) {
+  .news-card img,
+  .news-link .news-card img {
+    height: 120px !important;
+  }
+}
+/* Faz o <a> comportar-se como item do grid/box e ocupar o mesmo espaço do fav-card */
+.fav-link {
+  display: inline-flex;     /* ou block, dependendo do seu grid */
+  text-decoration: none;
+  color: inherit;
+  align-items: stretch;
+  box-sizing: border-box;
+}
+
+/* Garante que o article interno ocupe 100% do link */
+.fav-link > .fav-card {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Mantém foco visível (acessibilidade) */
+.fav-link:focus,
+.fav-link:focus-visible {
+  outline: 3px solid rgba(23,98,155,0.12);
+  outline-offset: 2px;
+  border-radius: 12px;
+}
+
+/* Se quiser que o hover do link tenha feedback */
+.fav-link:hover .fav-card {
+  transform: translateY(-3px);
+  transition: transform .18s ease;
+  box-shadow: 0 10px 22px rgba(9,7,72,0.06);
+}
+
+/* Se o seu .fav-card tinha largura fixa ou max-width, mantenha-a */
+.fav-card {
+  background:#fff;
+  border-radius:12px;
+  overflow:hidden;
+  /* outras regras que já usa... */
+}
+
+/* Se estiver usando grid/flex para .favorites-grid, assegure que o <a> não “quebre” o layout */
+.favorites-grid a.fav-link {
+  width: 100%;
+  display: block;
+}
 
 /* Carousel nav */
 .carousel-nav{
@@ -146,68 +247,324 @@ img { display:block; max-width:100%; height:auto; }
 }
 .dot.active{ background:var(--accent); }
 
-/* Explore */
-.explore { margin:40px 0; }
-.explore-header { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
-.explore-header h2 { font-size:20px; margin:0; font-weight:700; }
+.explore {
+  margin: 40px 0;
+  background: var(--blue, #ffffff);
+  padding: 28px 16px;
+  border-radius: 16px;
+  color: #fff; /* texto padrão branco dentro do painel */
+}
+.explore-panel {
+  position: relative;
+  margin-top: 12px;
+}
+
+/* botões com < e > */
+.explore-nav {
+  background: transparent;
+  position: absolute;        /* sem caixa branca */
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  cursor:pointer;
+  box-shadow: none;
+}
+
+/* posicao */
+.explore-nav.left { left: 8px; }
+.explore-nav.right { right: 8px; }
+
+#explore-row {
+  scroll-behavior: smooth;
+}
+
+/* linha de tiles: esconder scrollbar */
 .explore-row {
   display:flex;
   gap:20px;
   overflow-x:auto;
-  padding:8px 6px;
   scroll-snap-type: x mandatory;
+  padding: 8px 48px; /* espaço lateral para os botões não cobrir o conteúdo */
+  scrollbar-width: none; /* Firefox */
 }
-.tile{
-  scroll-snap-align: start;
+
+.explore-row::-webkit-scrollbar { display: none; }
+.explore-row:hover { cursor: grab; } /* WebKit */
+.explore-panel.autoplay-running::after {
+  content: '';
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  width: 8px;
+  height: 8px;
+  background: rgba(0,0,0,0.45);
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+
+/* título branco */
+.explore-header h2 { color: #000000; text-align: center; font-size: 28px;}
+
+/* Row */
+.explore-row { display:flex; gap:20px; overflow-x:auto; padding:8px 6px; scroll-snap-type: x mandatory; }
+
+/* Tiles tornam-se transparentes (sem fundo) */
+.tile {
   min-width:220px;
   max-width:260px;
-  background:#fff;
+  background:transparent;
   border-radius:12px;
-  box-shadow: var(--shadow);
   overflow:hidden;
   cursor:pointer;
   display:flex;
   flex-direction:column;
+  color: #000000;
+  box-shadow: none;
+  border: 1px solid rgba(255,255,255,0.06); /* leve contorno para separar */
 }
-.tile img { width:100%; height:140px; object-fit:cover; display:block; border-bottom-left-radius:0; border-bottom-right-radius:0; }
-.tile-body { padding:12px; display:flex; flex-direction:column; gap:6px; }
-.tile-body strong{ font-size:14px; }
-.tile-body span{ font-size:13px; color:var(--muted); }
+/* Padrão visual para imagens dos tiles */
+.tile img {
+  width: 100%;                /* ocupa toda a largura do tile */
+  height: 160px;              /* altura fixa para uniformidade */
+  object-fit: cover;          /* corta/encaixa a imagem mantendo o foco central */
+  object-position: center;    /* garante que o centro da imagem seja priorizado */
+  display: block;
+  border-radius: 8px;         /* arredonda cantos */
+  transition: transform .28s ease, filter .28s ease;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* Opcional: usar uma leve sombra ou borda para contraste sobre o fundo azul */
+  box-shadow: 0 6px 18px rgba(9,7,72,0.06);
+  background-color: #f2f2f2;  /* fallback caso a imagem demore a carregar */
+}
+
+/* Forçar mesma proporção em navegadores que suportam aspect-ratio (opcional) */
+.tile .img-wrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;       /* mantém proporção 16:9; ajuste se preferir 4/3 etc */
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+/* Hover/Focus: leve zoom para interatividade */
+.tile:hover img,
+.tile:focus-within img {
+  transform: scale(1.03);
+  filter: saturate(1.05);
+}
+
+/* Em telas pequenas, reduzir altura para caber melhor */
+@media (max-width: 700px) {
+  .tile img { height: 120px; }
+  .tile { min-width: 200px; max-width: 220px; }
+}
+
+/* Se preferir imagem sem bordas arredondadas no topo (quando tile tiver background branco) */
+.tile.no-radius img { border-radius: 0; }
+
+/* Boilerplate: garantir que imagens vazias não quebrem layout */
+.tile img[src=""],
+.tile img:not([src]) {
+  display: block;
+  min-height: 160px;
+  background: linear-gradient(90deg, #eee, #ddd);
+}
+/* Tornar textos em branco para contraste */
+.tile-body strong, .tile-body span { color: #000000; }
+.tile-body span { opacity: 0.9; font-size:13px; }
 
 /* Favorites */
-.favorites { margin:48px 0; }
-.favorites h2 { font-size:20px; margin:0 0 18px; }
-.heart { color:var(--danger); margin-left:8px; font-weight:400; }
+/* Favorites */
+.favorites {
+  margin: 28px 0;            /* reduzi espaço vertical geral */
+  display: flex;
+  flex-direction: column;   /* para que align-items funcione */
+  align-items: center;      /* centraliza o conteúdo (título + grid) */
+  gap: 16px;
+  text-align: center;       /* garante título centralizado */
+}
 
-/* favorites-grid */
-.favorites-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap:18px; margin-bottom:20px; }
-.fav-card { background:#fff; border-radius:12px; box-shadow: var(--shadow); overflow:hidden; display:flex; gap:12px; align-items:flex-start; }
-.fav-card img { width:140px; height:120px; object-fit:cover; }
-.fav-body { padding:12px; }
-.fav-body strong { display:block; margin-bottom:6px; font-size:14px; }
-.fav-body p { margin:0; color:var(--muted); font-size:13px; }
+/* título centralizado e comportamento responsivo */
+.favorites h2 {
+  font-size: 28px;          /* ajuste de tamanho para melhor equilíbrio */
+  margin-top: 40px;
+  color: var(--text);
+  width: 100%;
+  max-width: var(--max-width);
+}
+
+/* favorites-grid: menos espaço entre itens e limite de largura */
+.favorites-grid {
+  display: grid;
+  /* limit each column to between 160px and 220px (so columns don't grow huge) */
+  grid-template-columns: repeat(auto-fit, minmax(160px, 220px));
+  gap: 12px;                   /* espaço entre os cartões */
+  width: 100%;
+  justify-content: center;     /* centraliza o conjunto quando há espaço sobrando */
+  max-width: 980px;            /* opcional: limita largura do grid para evitar espaçamento extremo */
+  margin: 0 auto;              /* centraliza o bloco do grid na página */
+}
+
+/* cartão */
+.fav-card {
+  background:#e6f3f7;
+  border-radius:12px;
+  box-shadow: var(--shadow);
+  overflow:hidden;
+  display:flex;
+  gap:10px;                 /* espaço interno menor */
+  align-items:center;       /* alinha imagem + conteúdo verticalmente */
+  padding: 10px;
+  height: auto;
+  width: 100%;
+}
+
+/* imagem do cartão */
+.fav-card img {
+  width: 100px;              /* menor para reduzir impacto no layout */
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex: 0 0 auto;
+}
+
+/* corpo do cartão */
+.fav-body {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+.fav-body strong { font-size:20px; margin:0; }
+
+/* Ajustes responsivos */
+@media (max-width: 700px) {
+  .favorites { margin: 18px 0; gap: 12px; }
+  .favorites h2 { font-size: 20px; }
+  .fav-card { gap: 8px; padding: 8px; }
+  .fav-card img { width: 80px; height: 60px; }
+  .favorites-grid { gap: 8px; }
+}
 
 /* Circle links */
 .circle-links { display:flex; gap:28px; margin-top:18px; align-items:center; flex-wrap:wrap; }
 .circle-item { text-decoration:none; color:var(--text); display:flex; flex-direction:column; align-items:center; gap:8px; font-size:13px; text-align:center; }
-.circle-item img { width:72px; height:72px; border-radius:50%; object-fit:cover; }
+.circle-item img { width:100px; height:100px; border-radius:50%; object-fit:cover; }
 
 /* Footer */
+/* Footer: layout e estilos */
 .site-footer {
+  background: linear-gradient(180deg, #e6f3f7 0%, #e6f3f7 100%); /* azul agradável */
+  color: #000000;
+  padding: 40px 20px;
+  border-radius: 12px;
+  margin-top: 28px;
+  box-shadow: 0 8px 24px rgba(9,7,72,0.08);
+}
+
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+/* Colunas */
+.footer-col h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+  color: #000000;
+}
+.footer-brand .footer-logo {
+  width: 140px;
+  height: auto;
+  display: block;
+  margin-bottom: 12px;
+}
+.footer-desc {
+  margin: 0 0 12px;
+  color: #000000;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Links e sociais */
+.socials { display:flex; gap:10px; flex-wrap:wrap; margin-top:6px; }
+.social-link {
+  display:inline-block;
+  font-size: 14px;
+  color: #000000;
+  text-decoration: none;
+  background: rgba(255,255,255,0.06);
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+.social-link:hover { background: rgba(255,255,255,0.12); }
+
+/* Quick links list */
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer-links li { margin-bottom: 8px; }
+.footer-links a {
+  color: #000000;
+  text-decoration: none;
+  font-size: 14px;
+}
+.footer-links a:hover { text-decoration: underline; }
+
+/* Contact */
+.footer-contact address { font-style: normal; color: #000000; }
+.contact-row { display:flex; gap:8px; align-items:center; margin-bottom:8px; }
+.contact-title { font-weight:600; min-width:140px; color: rgba(0, 0, 0, 0.9); }
+.contact-phone { color: #000000; text-decoration: none; }
+.contact-phone:hover { text-decoration: underline; }
+
+/* Info */
+.footer-info .footer-address,
+.footer-info .footer-hours { color: rgba(0, 0, 0, 0.95); font-size: 14px; margin: 0 0 8px; }
+
+/* Bottom bar */
+.footer-bottom {
+  max-width: var(--max-width);
+  margin: 20px auto 0;
   display:flex;
   justify-content:space-between;
-  align-items:flex-start;
-  gap:20px;
-  margin-top:48px;
-  padding-top:28px;
-  border-top:1px solid rgba(0,0,0,0.06);
+  align-items:center;
+  gap: 12px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  padding-top: 14px;
 }
-.footer-left { display:flex; flex-direction:column; gap:8px; }
-.socials a { margin-right:10px; text-decoration:none; color:rgba(0,0,0,0.6); font-size:14px; }
-.footer-right { display:flex; gap:28px; }
-.contact-block { text-align:right; }
-.contact-title { font-size:13px; color:var(--muted); }
-.contact-phone { color:var(--blue); font-weight:600; font-size:13px; }
+.footer-bottom small { color: rgba(0,0,0,0.85); }
+.footer-policy a {
+  color: rgba(0,0,0,0.9);
+  margin-left: 12px;
+  text-decoration: none;
+  font-size: 13px;
+}
+.footer-policy a:hover { text-decoration: underline; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .footer-inner { grid-template-columns: repeat(2, 1fr); }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap:8px; }
+}
+@media (max-width: 520px) {
+  .footer-inner { grid-template-columns: 1fr; }
+  .contact-title { min-width: 110px; }
+  .footer-brand .footer-logo { width: 110px; }
+  .footer-bottom { align-items: center; text-align: center; }
+}
 
 /* Favorited visual */
 .favorited { outline:3px solid rgba(236,34,31,0.12); }
@@ -234,4 +591,83 @@ img { display:block; max-width:100%; height:auto; }
   .tile img { height:120px; }
   .favorites-grid { grid-template-columns: 1fr; }
   .site-footer { flex-direction:column; align-items:flex-start; gap:16px; }
+}
+
+/* Sidebar / overlay */
+.sidebar-overlay {
+  position: fixed;
+  inset: 0; /* top/right/bottom/left:0 */
+  background: rgba(0,0,0,0.45);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .28s ease, visibility .28s;
+  z-index: 1100;
+}
+.sidebar-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Sidebar panel */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 320px;
+  max-width: 80%;
+  background: #ffffff;
+  color: var(--text);
+  transform: translateX(-110%); /* hidden left */
+  transition: transform .32s cubic-bezier(.2,.9,.3,1);
+  box-shadow: 0 20px 40px rgba(9,7,72,0.12);
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+}
+
+/* Open state */
+.sidebar.open {
+  transform: translateX(0);
+}
+
+/* Sidebar header */
+.sidebar-header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:12px;
+}
+.sidebar .close-btn { background: transparent; border:0; font-size:18px; }
+
+/* Nav */
+.sidebar-nav ul {
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.sidebar-nav a {
+  display:block;
+  padding:10px 8px;
+  color:var(--text);
+  text-decoration:none;
+  border-radius:8px;
+}
+.sidebar-nav a:hover,
+.sidebar-nav a:focus {
+  background: rgba(23,98,155,0.06);
+  outline: none;
+}
+
+/* Footer */
+.sidebar-footer { margin-top:auto; font-size:13px; color:var(--muted); }
+
+/* Small screens tweak */
+@media (max-width: 600px) {
+  .sidebar { width: 92%; max-width: 92%; padding: 14px; }
 }
