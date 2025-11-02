@@ -645,3 +645,40 @@ img { display:block; max-width:100%; height:auto; }
 @media (max-width: 600px) {
   .sidebar { width: 92%; max-width: 92%; padding: 14px; }
 }
+
+/* Modal styles for news */
+.news-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1400;
+  padding: 20px;
+}
+.news-modal {
+  width: min(500px, 96%);
+  max-height: 90vh;
+  overflow: auto;
+  background: #fff;
+  color: var(--text);
+  border-radius: 12px;
+  box-shadow: 0 30px 60px rgba(9,7,72,0.2);
+  padding: 18px;
+  outline: none;
+}
+.news-modal-header {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+.news-modal-header h3 { margin: 0; font-size: 20px; color: var(--accent); }
+.news-modal-body img { width: 100%; height: auto; border-radius: 8px; margin-bottom: 12px; }
+.news-modal-body p { color: rgba(0,0,0,0.85); line-height: 1.6; margin: 0 0 12px; font-size: 15px; }
+.news-modal-footer { display:flex; gap:12px; justify-content:flex-end; align-items:center; padding-top: 8px; border-top: 1px solid rgba(0,0,0,0.04); }
+

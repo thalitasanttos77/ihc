@@ -1,10 +1,12 @@
 import { Router } from '@angular/router';
 import { Component, ElementRef, ViewChild, AfterViewInit, OnDestroy, Renderer2, HostListener } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
+  imports: [CommonModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -13,12 +15,18 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   @ViewChild('exploreRow', { static: false }) exploreRow!: ElementRef<HTMLElement>;
   @ViewChild('sidebar', { static: false }) sidebarEl!: ElementRef<HTMLElement>;
   @ViewChild('menuBtn', { static: false }) menuBtn!: ElementRef<HTMLButtonElement>;
+  @ViewChild('newsModal', { static: false }) newsModalEl!: ElementRef<HTMLElement>;
 
   isSidebarOpen = false;
   private autoplayIntervalId: any = null;
   private autoplayDelay = 3000; // ms
   private tilesToScroll = 1;
   private isPaused = false;
+
+  // modal state
+  isNewsModalOpen = false;
+  selectedNews: any = null;
+  private lastFocusedBeforeModal: HTMLElement | null = null;
 
   // counter to avoid rapid pause/resume when moving between child elements
   private hoverCounter = 0;
@@ -29,10 +37,52 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   private unlistenFocusIn: (() => void) | null = null;
   private unlistenFocusOut: (() => void) | null = null;
 
+  // sample news list (move to service if prefer)
+  newsList = [
+    {
+      id: 'vestibular-2026',
+      title: 'Vestibular 2026',
+      img: 'img/estudantes.png',
+      alt: 'vestibular 2026',
+      excerpt: 'Fique por dentro das datas de inscrição, isenção, provas e da divulgação do edital oficial.',
+      content: 'Informações completas sobre o Vestibular 2026: prazos, etapas e orientações para candidatos...',
+      keywords: 'vestibular 2026'
+    },
+    {
+      id: 'evento-tech',
+      title: 'Evento Tech',
+      img: 'img/evento.jpg',
+      alt: 'Evento TECH',
+      excerpt: 'Garanta sua vaga no maior evento de tecnologia, com palestras, workshops e networking com profissionais da área.',
+      content: 'O Evento Tech contará com palestrantes nacionais e internacionais, programação intensa de workshops...',
+      keywords: 'Evento TECH'
+    },
+    {
+      id: 'projetos-extensao',
+      title: 'Projetos de Extensão',
+      img: 'img/estudantes-rindo.png',
+      alt: 'projetos de extensão',
+      excerpt: 'Descubra como aplicar seus conhecimentos acadêmicos em projetos práticos.',
+      content: 'Os projetos de extensão oferecem oportunidades de aplicar conhecimentos acadêmicos em ações sociais...',
+      keywords: 'projetos extensão'
+    },
+    {
+      id: 'formandos-2026-1',
+      title: 'Formandos 2026.1',
+      img: 'img/formandos.jpg',
+      alt: 'Formandos 2026.1',
+      excerpt: 'Descubra como se preparar para a formatura e os eventos relacionados.',
+      content: 'Informações sobre cerimônias, ensaios e retirada de becas para formandos 2026.1...',
+      keywords: 'formatura formandos 2026'
+    }
+  ];
+
   constructor(private renderer: Renderer2, private router: Router) {}
 
-    openNews(id: string) {
-    // ex.: registrar analytics aqui
+    openNews(id: string | undefined) {
+    if (!id) return;
+    // navega para a rota da notícia completa (se existir)
+    this.closeNewsModal();
     this.router.navigate(['/news', id]);
   }
 
@@ -221,9 +271,41 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     this.resumeAutoplay();
   }
 
-  // Close on ESC
+  // Modal controls
+  openNewsModal(news: any) {
+    if (!news) return;
+    this.lastFocusedBeforeModal = document.activeElement as HTMLElement;
+    this.selectedNews = news;
+    this.isNewsModalOpen = true;
+    // pause autoplay while modal open
+    this.pauseAutoplay();
+    // focus modal container after view updated
+    setTimeout(() => {
+      try {
+        this.newsModalEl?.nativeElement?.focus();
+      } catch {}
+    }, 0);
+  }
+
+  closeNewsModal() {
+    this.isNewsModalOpen = false;
+    this.selectedNews = null;
+    // resume autoplay
+    this.resumeAutoplay();
+    // restore focus
+    setTimeout(() => {
+      if (this.lastFocusedBeforeModal) this.lastFocusedBeforeModal.focus();
+    }, 0);
+  }
+
+  // Close on ESC (also closes modal)
   @HostListener('document:keydown.escape', ['$event'])
   handleEscape(event: KeyboardEvent) {
+    if (this.isNewsModalOpen) {
+      event.preventDefault();
+      this.closeNewsModal();
+      return;
+    }
     if (this.isSidebarOpen) {
       event.preventDefault();
       this.closeSidebar();

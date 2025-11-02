@@ -110,7 +110,8 @@
             <li><a href="#" (click)="closeSidebar()">🔹AGTIC</a></li>
             <li><a href="#" (click)="closeSidebar()">🔹Coordenação do Curso</a></li>
             <li><a href="#" (click)="closeSidebar()">🔹Pró Reitorias</a></li>
-            <li><a href="http://200.236.3.198:28080/cadastrosept2/contato" (click)="closeSidebar()">🔹Secretaria Online</a></li>
+            <li><a href="http://200.236.3.198:28080/cadastrosept2/contato" target="_blank" rel="noopener noreferrer"
+                (click)="closeSidebar()">🔹Secretaria Online</a></li>
           </ul>
         </details>
       </li>
@@ -153,50 +154,87 @@
       <!-- <button class="carousel-nav left" aria-label="Anterior">‹</button> -->
 
       <div class="news-cards" id="news-cards">
-        <article class="news-card" data-keywords="vestibular 2026">
-          <img src="img/estudantes.png" alt="vestibular 2026" />
+        <!-- Now each article click opens modal with the news object -->
+        <article class="news-card" *ngFor="let n of newsList; let i = index" (click)="openNewsModal(n)" tabindex="0"
+          role="button" (keydown.enter)="openNewsModal(n)" [attr.aria-label]="'Abrir notícia: ' + n.title"
+          [attr.data-keywords]="n.keywords">
+          <img [src]="n.img" [alt]="n.alt" />
           <div class="news-body">
-            <h3>Vestibular 2026</h3>
-            <p>
-              Fique por dentro das datas de inscrição, isenção, provas e da
-              divulgação do edital oficial.
-            </p>
-          </div>
-        </article>
-
-          <article class="news-card" data-keywords="Evento TECH">
-            <img src="img/evento.jpg" alt="Evento TECH" />
-            <div class="news-body">
-              <h3>Evento Tech</h3>
-              <p>Garanta sua vaga no maior evento de tecnologia, com palestras,
-                workshops e networking com profissionais da área.</p>
-            </div>
-          </article>
-
-
-        <article class="news-card" data-keywords="projetos extensão">
-          <img src="img/estudantes-rindo.png" alt="projetos de extensão" />
-          <div class="news-body">
-            <h3>Projetos de Extensão</h3>
-            <p>
-              Descubra como aplicar seus conhecimentos acadêmicos em projetos práticos.
-            </p>
-          </div>
-        </article>
-
-        <article class="news-card" data-keywords="projetos extensão">
-          <img src="img/formandos.jpg" alt="Projetos de Extensão" />
-          <div class="news-body">
-            <h3>Formandos 2026.1</h3>
-            <p>
-              Descubra como se preparar para a formatura e os eventos
-              relacionados.
-            </p>
+            <h3>{{ n.title }}</h3>
+            <p>{{ n.excerpt }}</p>
           </div>
         </article>
       </div>
     </div>
+
+  <!-- Modal: notícia -->
+  <div class="news-modal-overlay" *ngIf="isNewsModalOpen" (click)="closeNewsModal()">
+    <div class="news-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"
+      (click)="$event.stopPropagation()" #newsModal tabindex="-1">
+      <header class="news-modal-header">
+        <h3 id="modal-title">{{ selectedNews?.title }}</h3>
+        <button class="icon-btn" aria-label="Fechar notícia" (click)="closeNewsModal()">✕</button>
+      </header>
+
+      <div class="news-modal-body">
+        <img *ngIf="selectedNews?.img" [src]="selectedNews.img" [alt]="selectedNews.alt" />
+        <p>{{ selectedNews?.content }}</p>
+      </div>
+
+      <footer class="news-modal-footer">
+        <!-- opcional: abrir página completa -->
+        <button class="icon-btn" (click)="openNews(selectedNews?.id)" *ngIf="selectedNews?.id">Abrir página</button>
+        <button class="icon-btn" (click)="closeNewsModal()">Fechar</button>
+      </footer>
+    </div>
+  </div>
   </section>
+
+
+  <!-- <div class="news-cards" id="news-cards">
+    <article class="news-card" data-keywords="vestibular 2026">
+      <img src="img/estudantes.png" alt="vestibular 2026" />
+      <div class="news-body">
+        <h3>Vestibular 2026</h3>
+        <p>
+          Fique por dentro das datas de inscrição, isenção, provas e da
+          divulgação do edital oficial.
+        </p>
+      </div>
+    </article>
+
+    <article class="news-card" data-keywords="Evento TECH">
+      <img src="img/evento.jpg" alt="Evento TECH" />
+      <div class="news-body">
+        <h3>Evento Tech</h3>
+        <p>Garanta sua vaga no maior evento de tecnologia, com palestras,
+          workshops e networking com profissionais da área.</p>
+      </div>
+    </article>
+
+
+    <article class="news-card" data-keywords="projetos extensão">
+      <img src="img/estudantes-rindo.png" alt="projetos de extensão" />
+      <div class="news-body">
+        <h3>Projetos de Extensão</h3>
+        <p>
+          Descubra como aplicar seus conhecimentos acadêmicos em projetos práticos.
+        </p>
+      </div>
+    </article>
+
+    <article class="news-card" data-keywords="projetos extensão">
+      <img src="img/formandos.jpg" alt="Projetos de Extensão" />
+      <div class="news-body">
+        <h3>Formandos 2026.1</h3>
+        <p>
+          Descubra como se preparar para a formatura e os eventos
+          relacionados.
+        </p>
+      </div>
+    </article>
+  </div>
+  </section> -->
 
   <!-- Replace the existing explore section with this -->
   <section class="explore" aria-labelledby="explore-title">
@@ -207,19 +245,19 @@
     <div class="explore-panel">
       <div class="explore-row" id="explore-row" #exploreRow>
 
-      <a class="news-link" href="https://prograp.ufpr.br/calendario-academico/" target="_blank"
-        rel="noopener noreferrer" aria-label="Abrir Calendário Acadêmico 2025 em nova aba">
-        <article class="tile" data-keywords="vida acadêmica matrícula trancamento estágios">
-          <div class="img-wrapper">
-            <img src="img/santos-andrade.jpg" alt="Vida Acadêmica" />
-          </div>
-          <div class="tile-body">
-            <strong>Vida Acadêmica</strong>
-            <br>
-            <span>Calendário Acadêmico, Matrícula.</span>
-          </div>
-        </article>
-      </a>
+        <a class="news-link" href="https://prograp.ufpr.br/calendario-academico/" target="_blank"
+          rel="noopener noreferrer" aria-label="Abrir Calendário Acadêmico 2025 em nova aba">
+          <article class="tile" data-keywords="vida acadêmica matrícula trancamento estágios">
+            <div class="img-wrapper">
+              <img src="img/santos-andrade.jpg" alt="Vida Acadêmica" />
+            </div>
+            <div class="tile-body">
+              <strong>Vida Acadêmica</strong>
+              <br>
+              <span>Calendário Acadêmico, Matrícula.</span>
+            </div>
+          </article>
+        </a>
 
         <article class="tile" data-keywords="ferramentas ufpr virtual teams office">
           <div class="img-wrapper">
@@ -317,8 +355,9 @@
         </article>
       </a>
 
-      <a class="fav-link" href="https://ufpr.br/ufpr-se-integra-ao-eduroam-servico-que-oferece-internet-sem-fio-de-maneira-mais-facil-e-segura-aos-usuarios/" target="_blank" rel="noopener noreferrer"
-      aria-label="Abrir Wifi">
+      <a class="fav-link"
+        href="https://ufpr.br/ufpr-se-integra-ao-eduroam-servico-que-oferece-internet-sem-fio-de-maneira-mais-facil-e-segura-aos-usuarios/"
+        target="_blank" rel="noopener noreferrer" aria-label="Abrir Wifi">
         <article class="fav-card">
           <img src="img/wifi.png" alt="Wifi" />
           <div class="fav-body">
@@ -327,8 +366,8 @@
         </article>
       </a>
 
-       <a class="fav-link" href="https://progepe.ufpr.br/progepe/caiss/casa4/" target="_blank" rel="noopener noreferrer"
-      aria-label="Abrir Casa 4">
+      <a class="fav-link" href="https://progepe.ufpr.br/progepe/caiss/casa4/" target="_blank" rel="noopener noreferrer"
+        aria-label="Abrir Casa 4">
         <article class="fav-card">
           <img src="img/psicologo.jpg" alt="Casa 4" />
           <div class="fav-body">
@@ -390,70 +429,70 @@
     </div>
   </section>
 
-    <br><br><br>
-    <!-- Footer contact -->
-    <footer class="site-footer" role="contentinfo" aria-label="Rodapé do site">
-      <div class="footer-inner">
-        <div class="footer-col footer-brand">
-          <img src="img/logo-ufpr2.png" alt="Logo UFPR" class="footer-logo" />
-          <p class="footer-desc">Portal do Estudante — UFPR. Acesse serviços, notícias e recursos para apoiar sua
-            jornada
-            acadêmica.</p>
+  <br><br><br>
+  <!-- Footer contact -->
+  <footer class="site-footer" role="contentinfo" aria-label="Rodapé do site">
+    <div class="footer-inner">
+      <div class="footer-col footer-brand">
+        <img src="img/logo-ufpr2.png" alt="Logo UFPR" class="footer-logo" />
+        <p class="footer-desc">Portal do Estudante — UFPR. Acesse serviços, notícias e recursos para apoiar sua
+          jornada
+          acadêmica.</p>
 
-          <div class="socials" aria-label="Redes sociais">
-            <a href="#" aria-label="Facebook" class="social-link">Facebook</a>
-            <a href="#" aria-label="Twitter" class="social-link">Twitter</a>
-            <a href="#" aria-label="Instagram" class="social-link">Instagram</a>
+        <div class="socials" aria-label="Redes sociais">
+          <a href="#" aria-label="Facebook" class="social-link">Facebook</a>
+          <a href="#" aria-label="Twitter" class="social-link">Twitter</a>
+          <a href="#" aria-label="Instagram" class="social-link">Instagram</a>
+        </div>
+      </div>
+
+      <div class="footer-col footer-links" aria-labelledby="footer-links-title">
+        <h3 id="footer-links-title">Links Rápidos</h3>
+        <ul>
+          <li><a href="#" title="Calendário Acadêmico">Calendário Acadêmico</a></li>
+          <li><a href="#" title="Secretaria Online">Secretaria Online</a></li>
+          <li><a href="#" title="Matrícula">Matrícula</a></li>
+          <li><a href="#" title="Biblioteca">Biblioteca</a></li>
+          <li><a href="#" title="Portal do Aluno">Portal do Aluno</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-contact" aria-labelledby="footer-contact-title">
+        <h3 id="footer-contact-title">Contato</h3>
+        <address>
+          <div class="contact-row">
+            <span class="contact-title">Coordenação do Curso</span>
+            <a href="tel:+554133614905" class="contact-phone">(41) 3361-4905</a>
           </div>
-        </div>
 
-        <div class="footer-col footer-links" aria-labelledby="footer-links-title">
-          <h3 id="footer-links-title">Links Rápidos</h3>
-          <ul>
-            <li><a href="#" title="Calendário Acadêmico">Calendário Acadêmico</a></li>
-            <li><a href="#" title="Secretaria Online">Secretaria Online</a></li>
-            <li><a href="#" title="Matrícula">Matrícula</a></li>
-            <li><a href="#" title="Biblioteca">Biblioteca</a></li>
-            <li><a href="#" title="Portal do Aluno">Portal do Aluno</a></li>
-          </ul>
-        </div>
+          <div class="contact-row">
+            <span class="contact-title">Secretaria Online</span>
+            <a href="tel:+554133614905" class="contact-phone">(41) 3361-4905</a>
+          </div>
 
-        <div class="footer-col footer-contact" aria-labelledby="footer-contact-title">
-          <h3 id="footer-contact-title">Contato</h3>
-          <address>
-            <div class="contact-row">
-              <span class="contact-title">Coordenação do Curso</span>
-              <a href="tel:+554133614905" class="contact-phone">(41) 3361-4905</a>
-            </div>
-
-            <div class="contact-row">
-              <span class="contact-title">Secretaria Online</span>
-              <a href="tel:+554133614905" class="contact-phone">(41) 3361-4905</a>
-            </div>
-
-            <div class="contact-row">
-              <span class="contact-title">E-mail</span>
-              <a href="mailto:secretaria&#64;ufpr.br" class="contact-phone">secretaria&#64;ufpr.br</a>
-            </div>
-          </address>
-        </div>
-
-        <div class="footer-col footer-info" aria-labelledby="footer-info-title">
-          <h3 id="footer-info-title">Local & Horário</h3>
-          <p class="footer-address">Universidade Federal do Paraná — Campus Curitiba<br />Av. Brasil, 1234 — Curitiba -
-            PR
-          </p>
-          <p class="footer-hours"><strong>Horário de atendimento:</strong><br />Seg — Sex: 09:00 — 17:00</p>
-        </div>
+          <div class="contact-row">
+            <span class="contact-title">E-mail</span>
+            <a href="mailto:secretaria&#64;ufpr.br" class="contact-phone">secretaria&#64;ufpr.br</a>
+          </div>
+        </address>
       </div>
 
-      <div class="footer-bottom">
-        <small> <span id="year">2025</span> Universidade Federal do Paraná. Todos os direitos reservados.</small>
-        <nav class="footer-policy" aria-label="Políticas e Acessibilidade">
-          <a href="#" title="Termos de uso">Termos de uso</a>
-          <a href="#" title="Política de privacidade">Política de privacidade</a>
-          <a href="#" title="Acessibilidade">Acessibilidade</a>
-        </nav>
+      <div class="footer-col footer-info" aria-labelledby="footer-info-title">
+        <h3 id="footer-info-title">Local & Horário</h3>
+        <p class="footer-address">Universidade Federal do Paraná — Campus Curitiba<br />Av. Brasil, 1234 — Curitiba -
+          PR
+        </p>
+        <p class="footer-hours"><strong>Horário de atendimento:</strong><br />Seg — Sex: 09:00 — 17:00</p>
       </div>
-    </footer>
+    </div>
+
+    <div class="footer-bottom">
+      <small> <span id="year">2025</span> Universidade Federal do Paraná. Todos os direitos reservados.</small>
+      <nav class="footer-policy" aria-label="Políticas e Acessibilidade">
+        <a href="#" title="Termos de uso">Termos de uso</a>
+        <a href="#" title="Política de privacidade">Política de privacidade</a>
+        <a href="#" title="Acessibilidade">Acessibilidade</a>
+      </nav>
+    </div>
+  </footer>
 </main>
