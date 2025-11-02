@@ -129,10 +129,10 @@ img { display:block; max-width:100%; height:auto; }
 .news-body { padding:6px 6px 0; }
 .news-body h3 { margin:0 0 6px; font-size:16px; color:var(--text); }
 .news-body p { margin:0; font-size:13px; color:var(--muted); }
-
 /* Garantir que o <a> que envolve o card se comporte como item de layout */
 .news-link {
   display: block;        /* garantir comportamento de bloco consistente com os outros itens */
+  flex: 0 0 auto;
   text-decoration: none;
   color: inherit;
   box-sizing: border-box;
@@ -146,20 +146,6 @@ img { display:block; max-width:100%; height:auto; }
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
-}
-
-/* Se você usa media queries que alteram height/width, mantenha parity */
-@media (max-width: 1099px) {
-  .news-card img,
-  .news-link .news-card img {
-    height: 140px !important;
-  }
-}
-@media (max-width: 700px) {
-  .news-card img,
-  .news-link .news-card img {
-    height: 120px !important;
-  }
 }
 
 /* Faz o <a> comportar-se como item do grid/box e ocupar o mesmo espaço do fav-card */
