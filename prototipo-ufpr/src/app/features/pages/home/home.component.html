@@ -8,111 +8,116 @@
 
   <div class="search">
     <input id="site-search" type="search" placeholder="Pesquisar..." aria-label="Pesquisar" />
-    <button class="icon-btn" title="Buscar" aria-label="Buscar"> <i class="fa-solid fa-search" aria-hidden="true"></i> </button>
+    <button class="icon-btn" title="Buscar" aria-label="Buscar"> <i class="fa-solid fa-search" aria-hidden="true"></i>
+    </button>
   </div>
 
   <nav class="top-actions" aria-label="Ações do usuário">
 
-    <button class="icon-btn" title="Idioma" aria-label="Idioma"> <i class="fa-solid fa-language" aria-hidden="true"></i> </button>
-    <button class="icon-btn" title="Notificações" aria-label="Notificações"> <i class="fa-solid fa-bell" aria-hidden="true"></i> </button>
-    <button class="icon-btn" title="Conta" aria-label="Conta"> <i class="fa-solid fa-user" aria-hidden="true"></i> </button>
+    <button class="icon-btn" title="Idioma" aria-label="Idioma"> <i class="fa-solid fa-language" aria-hidden="true"></i>
+    </button>
+    <button class="icon-btn" title="Notificações" aria-label="Notificações"> <i class="fa-solid fa-bell"
+        aria-hidden="true"></i> </button>
+    <button class="icon-btn" title="Conta" aria-label="Conta"> <i class="fa-solid fa-user" aria-hidden="true"></i>
+    </button>
   </nav>
 </header>
 
 <!-- Overlay and Sidebar (one instance only) -->
-<div class="sidebar-overlay" [class.show]="isSidebarOpen" (click)="closeSidebar()" [attr.aria-hidden]="!isSidebarOpen"></div>
+<div class="sidebar-overlay" [class.show]="isSidebarOpen" (click)="closeSidebar()" [attr.aria-hidden]="!isSidebarOpen">
+</div>
 
-<aside class="sidebar" role="dialog" aria-modal="true" aria-label="Navegação principal"
-       [class.open]="isSidebarOpen" #sidebar>
+<aside class="sidebar" role="dialog" aria-modal="true" aria-label="Navegação principal" [class.open]="isSidebarOpen"
+  #sidebar>
   <div class="sidebar-header">
     <strong>Menu</strong>
     <button class="icon-btn close-btn" aria-label="Fechar menu" (click)="closeSidebar()">✕</button>
   </div>
 
   <nav class="sidebar-nav" aria-label="Menu principal">
-  <ul>
-    <li>
-      <details>
-        <summary>Vida Acadêmica</summary>
-        <ul class="sublist">
-          <li><a href="#" (click)="closeSidebar()">🔹Biblioteca</a></li>
-          <li><a href="#" (click)="closeSidebar()">🔹Calendário Acadêmico</a></li>
-          <li><a href="#" (click)="closeSidebar()">🔹Estágios</a></li>
-           <li><a href="#" (click)="closeSidebar()">🔹Grade Horária</a></li>
-          <li><a href="#" (click)="closeSidebar()">🔹Matrícula</a></li>
-          <li><a href="#" (click)="closeSidebar()">🔹SIGA</a></li>
-        </ul>
-      </details>
-    </li>
+    <ul>
+      <li>
+        <details>
+          <summary>Vida Acadêmica</summary>
+          <ul class="sublist">
+            <li><a href="#" (click)="closeSidebar()">🔹Biblioteca</a></li>
+            <li><a href="#" (click)="closeSidebar()">🔹Calendário Acadêmico</a></li>
+            <li><a href="#" (click)="closeSidebar()">🔹Estágios</a></li>
+            <li><a href="#" (click)="closeSidebar()">🔹Grade Horária</a></li>
+            <li><a href="#" (click)="closeSidebar()">🔹Matrícula</a></li>
+            <li><a href="#" (click)="closeSidebar()">🔹SIGA</a></li>
+          </ul>
+        </details>
+      </li>
 
       <li>
-      <details>
-        <summary>Ferramentas</summary>
-        <ul class="sublist">
-          <li><a href="#" (click)="closeSidebar()">🔹Office 365</a></li>
-          <li><a href="#" (click)="closeSidebar()">🔹Teams</a></li>
-          <li><a href="#" (click)="closeSidebar()">🔹UFPR Virtual</a></li>
-          <li><a href="#" (click)="closeSidebar()">🔹Wifi</a></li>
-        </ul>
-      </details>
-    </li>
+        <details>
+          <summary>Ferramentas</summary>
+          <ul class="sublist">
+            <li><a href="#" (click)="closeSidebar()">🔹Office 365</a></li>
+            <li><a href="#" (click)="closeSidebar()">🔹Teams</a></li>
+            <li><a href="#" (click)="closeSidebar()">🔹UFPR Virtual</a></li>
+            <li><a href="#" (click)="closeSidebar()">🔹Wifi</a></li>
+          </ul>
+        </details>
+      </li>
 
-     <li>
-      <details>
-        <summary>Oportunidades</summary>
-        <ul class="sublist">
-          <li><a href="#" (click)="closeSidebar()">🔹Atléticas</a></li>
-          <li><a href="#" (click)="closeSidebar()">🔹Bolsas Auxílio</a></li>
-           <li><a href="#" (click)="closeSidebar()">🔹Centro Acadêmico</a></li>
-          <li><a href="#" (click)="closeSidebar()">🔹Empresa Júnior</a></li>
-          <li><a href="#" (click)="closeSidebar()">🔹Extensão Acadêmica</a></li>
-        </ul>
-      </details>
-    </li>
+      <li>
+        <details>
+          <summary>Oportunidades</summary>
+          <ul class="sublist">
+            <li><a href="#" (click)="closeSidebar()">🔹Atléticas</a></li>
+            <li><a href="#" (click)="closeSidebar()">🔹Bolsas Auxílio</a></li>
+            <li><a href="#" (click)="closeSidebar()">🔹Centro Acadêmico</a></li>
+            <li><a href="#" (click)="closeSidebar()">🔹Empresa Júnior</a></li>
+            <li><a href="#" (click)="closeSidebar()">🔹Extensão Acadêmica</a></li>
+          </ul>
+        </details>
+      </li>
 
-     <li>
-      <details>
-        <summary>Eventos e Cultura</summary>
-        <ul class="sublist">
-          <li><a href="#" (click)="closeSidebar()">🔹Bancas de TCC</a></li>
-           <li><a href="#" (click)="closeSidebar()">🔹Cursos UFPR</a></li>
-          <li><a href="#" (click)="closeSidebar()">🔹Feira de Profissões</a></li>
-          <li><a href="#" (click)="closeSidebar()">🔹Horas Formativas</a></li>
-          <li><a href="#" (click)="closeSidebar()">🔹Palestras</a></li>
-        </ul>
-      </details>
-    </li>
-
-
-     <li>
-      <details>
-        <summary>Serviços UFPR</summary>
-        <ul class="sublist">
-          <li><a href="#" (click)="closeSidebar()">🔹Auditórios</a></li>
-           <li><a href="#" (click)="closeSidebar()">🔹Auxílios</a></li>
-          <li><a href="#" (click)="closeSidebar()">🔹Casa 3</a></li>
-          <li><a href="#" (click)="closeSidebar()">🔹Casa 4</a></li>
-          <li><a href="#" (click)="closeSidebar()">🔹Intercampi</a></li>
-          <li><a href="#" (click)="closeSidebar()">🔹R.U</a></li>
-        </ul>
-      </details>
-    </li>
-
-     <li>
-      <details>
-        <summary>Institucional</summary>
-        <ul class="sublist">
-          <li><a href="#" (click)="closeSidebar()">🔹AGTIC</a></li>
-          <li><a href="#" (click)="closeSidebar()">🔹Coordenação do Curso</a></li>
-           <li><a href="#" (click)="closeSidebar()">🔹Pró Reitorias</a></li>
-          <li><a href="#" (click)="closeSidebar()">🔹Secretaria Online</a></li>
-        </ul>
-      </details>
-    </li>
+      <li>
+        <details>
+          <summary>Eventos e Cultura</summary>
+          <ul class="sublist">
+            <li><a href="#" (click)="closeSidebar()">🔹Bancas de TCC</a></li>
+            <li><a href="#" (click)="closeSidebar()">🔹Cursos UFPR</a></li>
+            <li><a href="#" (click)="closeSidebar()">🔹Feira de Profissões</a></li>
+            <li><a href="#" (click)="closeSidebar()">🔹Horas Formativas</a></li>
+            <li><a href="#" (click)="closeSidebar()">🔹Palestras</a></li>
+          </ul>
+        </details>
+      </li>
 
 
-  </ul>
-</nav>
+      <li>
+        <details>
+          <summary>Serviços UFPR</summary>
+          <ul class="sublist">
+            <li><a href="#" (click)="closeSidebar()">🔹Auditórios</a></li>
+            <li><a href="#" (click)="closeSidebar()">🔹Auxílios</a></li>
+            <li><a href="#" (click)="closeSidebar()">🔹Casa 3</a></li>
+            <li><a href="#" (click)="closeSidebar()">🔹Casa 4</a></li>
+            <li><a href="#" (click)="closeSidebar()">🔹Intercampi</a></li>
+            <li><a href="#" (click)="closeSidebar()">🔹R.U</a></li>
+          </ul>
+        </details>
+      </li>
+
+      <li>
+        <details>
+          <summary>Institucional</summary>
+          <ul class="sublist">
+            <li><a href="#" (click)="closeSidebar()">🔹AGTIC</a></li>
+            <li><a href="#" (click)="closeSidebar()">🔹Coordenação do Curso</a></li>
+            <li><a href="#" (click)="closeSidebar()">🔹Pró Reitorias</a></li>
+            <li><a href="#" (click)="closeSidebar()">🔹Secretaria Online</a></li>
+          </ul>
+        </details>
+      </li>
+
+
+    </ul>
+  </nav>
 
   <div class="sidebar-footer">
     <small>Portal do Estudante — UFPR</small>
@@ -296,29 +301,38 @@
 
   <!-- Favoritos -->
   <section class="favorites" aria-labelledby="fav-title">
-    <h2 id="fav-title">Favoritos </h2>
+    <h2 id="fav-title">Favoritos</h2>
 
     <div class="favorites-grid">
-      <article class="fav-card">
-        <img src="img/ru.png" alt="R.U" />
-        <div class="fav-body">
-          <strong>R.U</strong>
-        </div>
-      </article>
+      <a class="fav-link" href="https://proad.ufpr.br/ru/cardapio-2/" target="_blank" rel="noopener noreferrer"
+        aria-label="Abrir R.U (abre em nova aba)">
+        <article class="fav-card">
+          <img src="img/ru.png" alt="R.U" />
+          <div class="fav-body">
+            <strong>R.U</strong>
+          </div>
+        </article>
+      </a>
 
-      <article class="fav-card">
-        <img src="img/wifi.png" alt="Wifi" />
-        <div class="fav-body">
-          <strong>Wifi</strong>
-        </div>
-      </article>
+      <a class="fav-link" href="https://ufpr.br/ufpr-se-integra-ao-eduroam-servico-que-oferece-internet-sem-fio-de-maneira-mais-facil-e-segura-aos-usuarios/" target="_blank" rel="noopener noreferrer"
+      aria-label="Abrir Wifi">
+        <article class="fav-card">
+          <img src="img/wifi.png" alt="Wifi" />
+          <div class="fav-body">
+            <strong>Wifi</strong>
+          </div>
+        </article>
+      </a>
 
-      <article class="fav-card">
-        <img src="img/psicologo.jpg" alt="Casa 4" />
-        <div class="fav-body">
-          <strong>Casa 4</strong>
-        </div>
-      </article>
+       <a class="fav-link" href="https://progepe.ufpr.br/progepe/caiss/casa4/" target="_blank" rel="noopener noreferrer"
+      aria-label="Abrir Casa 4">
+        <article class="fav-card">
+          <img src="img/psicologo.jpg" alt="Casa 4" />
+          <div class="fav-body">
+            <strong>Casa 4</strong>
+          </div>
+        </article>
+      </a>
 
       <a class="fav-link" href="https://office.com" target="_blank" rel="noopener noreferrer"
         aria-label="Abrir Office 365 (abre em nova aba)">
@@ -329,7 +343,6 @@
           </div>
         </article>
       </a>
-
     </div>
 
     <br><br>
@@ -374,68 +387,70 @@
     </div>
   </section>
 
-  <br><br><br>
-  <!-- Footer contact -->
-  <footer class="site-footer" role="contentinfo" aria-label="Rodapé do site">
-    <div class="footer-inner">
-      <div class="footer-col footer-brand">
-        <img src="img/logo-ufpr2.png" alt="Logo UFPR" class="footer-logo" />
-        <p class="footer-desc">Portal do Estudante — UFPR. Acesse serviços, notícias e recursos para apoiar sua jornada
-          acadêmica.</p>
+    <br><br><br>
+    <!-- Footer contact -->
+    <footer class="site-footer" role="contentinfo" aria-label="Rodapé do site">
+      <div class="footer-inner">
+        <div class="footer-col footer-brand">
+          <img src="img/logo-ufpr2.png" alt="Logo UFPR" class="footer-logo" />
+          <p class="footer-desc">Portal do Estudante — UFPR. Acesse serviços, notícias e recursos para apoiar sua
+            jornada
+            acadêmica.</p>
 
-        <div class="socials" aria-label="Redes sociais">
-          <a href="#" aria-label="Facebook" class="social-link">Facebook</a>
-          <a href="#" aria-label="Twitter" class="social-link">Twitter</a>
-          <a href="#" aria-label="Instagram" class="social-link">Instagram</a>
+          <div class="socials" aria-label="Redes sociais">
+            <a href="#" aria-label="Facebook" class="social-link">Facebook</a>
+            <a href="#" aria-label="Twitter" class="social-link">Twitter</a>
+            <a href="#" aria-label="Instagram" class="social-link">Instagram</a>
+          </div>
+        </div>
+
+        <div class="footer-col footer-links" aria-labelledby="footer-links-title">
+          <h3 id="footer-links-title">Links Rápidos</h3>
+          <ul>
+            <li><a href="#" title="Calendário Acadêmico">Calendário Acadêmico</a></li>
+            <li><a href="#" title="Secretaria Online">Secretaria Online</a></li>
+            <li><a href="#" title="Matrícula">Matrícula</a></li>
+            <li><a href="#" title="Biblioteca">Biblioteca</a></li>
+            <li><a href="#" title="Portal do Aluno">Portal do Aluno</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col footer-contact" aria-labelledby="footer-contact-title">
+          <h3 id="footer-contact-title">Contato</h3>
+          <address>
+            <div class="contact-row">
+              <span class="contact-title">Coordenação do Curso</span>
+              <a href="tel:+554133614905" class="contact-phone">(41) 3361-4905</a>
+            </div>
+
+            <div class="contact-row">
+              <span class="contact-title">Secretaria Online</span>
+              <a href="tel:+554133614905" class="contact-phone">(41) 3361-4905</a>
+            </div>
+
+            <div class="contact-row">
+              <span class="contact-title">E-mail</span>
+              <a href="mailto:secretaria&#64;ufpr.br" class="contact-phone">secretaria&#64;ufpr.br</a>
+            </div>
+          </address>
+        </div>
+
+        <div class="footer-col footer-info" aria-labelledby="footer-info-title">
+          <h3 id="footer-info-title">Local & Horário</h3>
+          <p class="footer-address">Universidade Federal do Paraná — Campus Curitiba<br />Av. Brasil, 1234 — Curitiba -
+            PR
+          </p>
+          <p class="footer-hours"><strong>Horário de atendimento:</strong><br />Seg — Sex: 09:00 — 17:00</p>
         </div>
       </div>
 
-      <div class="footer-col footer-links" aria-labelledby="footer-links-title">
-        <h3 id="footer-links-title">Links Rápidos</h3>
-        <ul>
-          <li><a href="#" title="Calendário Acadêmico">Calendário Acadêmico</a></li>
-          <li><a href="#" title="Secretaria Online">Secretaria Online</a></li>
-          <li><a href="#" title="Matrícula">Matrícula</a></li>
-          <li><a href="#" title="Biblioteca">Biblioteca</a></li>
-          <li><a href="#" title="Portal do Aluno">Portal do Aluno</a></li>
-        </ul>
+      <div class="footer-bottom">
+        <small> <span id="year">2025</span> Universidade Federal do Paraná. Todos os direitos reservados.</small>
+        <nav class="footer-policy" aria-label="Políticas e Acessibilidade">
+          <a href="#" title="Termos de uso">Termos de uso</a>
+          <a href="#" title="Política de privacidade">Política de privacidade</a>
+          <a href="#" title="Acessibilidade">Acessibilidade</a>
+        </nav>
       </div>
-
-      <div class="footer-col footer-contact" aria-labelledby="footer-contact-title">
-        <h3 id="footer-contact-title">Contato</h3>
-        <address>
-          <div class="contact-row">
-            <span class="contact-title">Coordenação do Curso</span>
-            <a href="tel:+554133614905" class="contact-phone">(41) 3361-4905</a>
-          </div>
-
-          <div class="contact-row">
-            <span class="contact-title">Secretaria Online</span>
-            <a href="tel:+554133614905" class="contact-phone">(41) 3361-4905</a>
-          </div>
-
-          <div class="contact-row">
-            <span class="contact-title">E-mail</span>
-            <a href="mailto:secretaria&#64;ufpr.br" class="contact-phone">secretaria&#64;ufpr.br</a>
-          </div>
-        </address>
-      </div>
-
-      <div class="footer-col footer-info" aria-labelledby="footer-info-title">
-        <h3 id="footer-info-title">Local & Horário</h3>
-        <p class="footer-address">Universidade Federal do Paraná — Campus Curitiba<br />Av. Brasil, 1234 — Curitiba - PR
-        </p>
-        <p class="footer-hours"><strong>Horário de atendimento:</strong><br />Seg — Sex: 09:00 — 17:00</p>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <small> <span id="year">2025</span> Universidade Federal do Paraná. Todos os direitos reservados.</small>
-      <nav class="footer-policy" aria-label="Políticas e Acessibilidade">
-        <a href="#" title="Termos de uso">Termos de uso</a>
-        <a href="#" title="Política de privacidade">Política de privacidade</a>
-        <a href="#" title="Acessibilidade">Acessibilidade</a>
-      </nav>
-    </div>
-  </footer>
+    </footer>
 </main>
